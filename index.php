@@ -1,4 +1,13 @@
-<!-- Bismillahir Rahmanir Rahim -->
+<!-- Bismillahir Rahmanir Rahim 
+
+
+//Record insert the following one and start from 21 minutes 
+
+INSERT INTO `tnotes` (`sno`, `title`, `description`, `time`) VALUES ('1.', 'shop for Today', 'Buy the followings:\r\n1. Fish\r\n2. Chicken\r\n3. Spice\r\n4. Rice\r\n5. Eggs\r\netc', '2022-09-22 21:06:58.000000');
+
+
+-->
+
 <?php 
 require_once('db.php');
 ?>
@@ -49,6 +58,7 @@ require_once('db.php');
           </form>
         </div>
       </nav>
+
       <div class="container my-5">
         <h2>Add a NOTE</h2>
         <form>
@@ -70,15 +80,42 @@ require_once('db.php');
         <?php
         $sql= "SELECT * FROM `tnotes`";
         $fireq = mysqli_query($con,$sql);
-///////////REcord insert the following one and start from 21 minutes INSERT INTO `tnotes` (`sno`, `title`, `description`, `time`) VALUES ('1.', 'shop for Today', 'Buy the followings:\r\n1. Fish\r\n2. Chicken\r\n3. Spice\r\n4. Rice\r\n5. Eggs\r\netc', '2022-09-22 21:06:58.000000');
-
-
-
-
+        VAR_DUMP($fireq);echo "<br>";
         while($row = mysqli_fetch_assoc($fireq)){
           echo $row['sno'].". Title is: ".$row['title']. " and description is:<br>".$row['description'];
         }
         ?>
+<table class="table bg-light text-dark my-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
       </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
