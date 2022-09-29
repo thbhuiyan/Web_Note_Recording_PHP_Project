@@ -1,14 +1,13 @@
 <!-- Bismillahir Rahmanir Rahim 
 
+//Record insert the following one and start from 42 minutes 
 
-//Record insert the following one and start from 21 minutes 
-
-INSERT INTO `tnotes` (`sno`, `title`, `description`, `time`) VALUES ('1.', 'shop for Today', 'Buy the followings:\r\n1. Fish\r\n2. Chicken\r\n3. Spice\r\n4. Rice\r\n5. Eggs\r\netc', '2022-09-22 21:06:58.000000');
 -->
 
 <?php
 require_once('db.php');
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -19,6 +18,7 @@ require_once('db.php');
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
   <title>iNotes - Notes taking make easy!</title>
 </head>
@@ -58,10 +58,22 @@ require_once('db.php');
       </form>
     </div>
   </nav>
+  <?php
+
+  if ($insert) {
+    echo '
+    <div class="alert alert-success " role="alert"><strong>Success!</strong> Notes has been inserted successfully! </div>';
+  }
+  ?>
+
+
+  <?php
+  require_once("create.php");
+  ?>
 
   <div class="container my-5">
     <h2>Add a NOTE</h2>
-    <form action="/crud_app/" method="POST">
+    <form action="/crud_app/index.php" method="POST">
       <div class="form-group">
         <label for="title">Note Title: </label>
         <input type="text" class="form-control" id="title" aria-describedby="title" name="title">
@@ -76,7 +88,7 @@ require_once('db.php');
   </div>
 
   <div class="container">
-    <table class="table bg-light text-dark my-3">
+    <table class="table bg-light text-dark my-3" id="myTable">
       <thead>
         <tr>
           <th scope="col">Serial No</th>
@@ -87,17 +99,7 @@ require_once('db.php');
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT * FROM `tnotes`";
-        $fireq = mysqli_query($con, $sql);
-        while ($row = mysqli_fetch_assoc($fireq)) {
-          echo '
-          <tr>
-            <th scope="row">' . $row['sno'] . '</th>
-            <td>' . $row['title'] . '</td>
-            <td>' . $row['description'] . '</td>
-            <td>Actions</td>
-        </tr>';
-        }
+        require_once("read.php");
         ?>
       </tbody>
     </table>
@@ -108,6 +110,15 @@ require_once('db.php');
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous">
+  </script>
+  <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#myTable').DataTable();
+    });
+  </script>
 </body>
 
 </html>
