@@ -1,9 +1,7 @@
 <!-- Bismillahir Rahmanir Rahim 
 
 //Record insert the following one and start from 42 minutes 
-
 -->
-
 <?php
 require_once('db.php');
 ?>
@@ -21,9 +19,47 @@ require_once('db.php');
   <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
   <title>iNotes - Notes taking make easy!</title>
+
 </head>
 
 <body>
+  <!-- Edit modal -->
+  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+    Edit Modal
+  </button> -->
+
+  <!-- Edit modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModal">Edit this note</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/crud_app/index.php" method="POST">
+            <div class="form-group">
+              <label for="title">Note Title: </label>
+              <input type="text" class="form-control" id="titleEdit" aria-describedby="title" name="titleEdit">
+            </div>
+            <div class="form-group">
+              <label for="description">Note Description: </label>
+              <textarea class="form-control" id="descriptionEdit" rows="3" name="descriptionEdit"></textarea>
+            </div>
+            <small id="title" class="form-text text-muted">We'll never share your records with anyone else.</small>
+            <button type="submit" class="btn btn-primary">Add Note</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Modal End -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">iNotes Logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,17 +143,38 @@ require_once('db.php');
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
   <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous">
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
   <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
   <script>
     $(document).ready(function() {
       $('#myTable').DataTable();
     });
+  </script>
+  <script>
+    edits = document.getElementsByClassName('edit');
+    Array.from(edits).forEach((element) => {
+      element.addEventListener("click", (e) => {
+        tr = e.target.parentNode.parentNode;
+        title = tr.getElementsByTagName("td")[0].innerText;
+        description = tr.getElementsByTagName("td")[1].innerText;
+        console.log(title, description);
+        titleEdit.value = title;
+        descriptionEdit.value = description;
+        $('#editModal').modal('toggle')
+      })
+    })
   </script>
 </body>
 
