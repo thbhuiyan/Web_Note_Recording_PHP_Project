@@ -10,7 +10,7 @@ while ($row = mysqli_fetch_assoc($fireq)) {
     <td>' . $row['title'] . '</td>
     <td>' . $row['description'] . '</td>
     <td>
-    <button class="edit btn btn-sm btn-primary">Edit</button>
+    <button class="edit btn btn-sm btn-primary" id=' . $row["sno"] . '>Edit</button>
     <br>
     <button href="/del">Delete</a>
     </td>

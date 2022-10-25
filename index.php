@@ -40,6 +40,7 @@ require_once('db.php');
         </div>
         <div class="modal-body">
           <form action="/crud_app/index.php" method="POST">
+            <input type="hidden" name="snoEdit" id="snoEdit">
             <div class="form-group">
               <label for="title">Note Title: </label>
               <input type="text" class="form-control" id="titleEdit" aria-describedby="title" name="titleEdit">
@@ -49,7 +50,7 @@ require_once('db.php');
               <textarea class="form-control" id="descriptionEdit" rows="3" name="descriptionEdit"></textarea>
             </div>
             <small id="title" class="form-text text-muted">We'll never share your records with anyone else.</small>
-            <button type="submit" class="btn btn-primary">Add Note</button>
+            <button type="submit" class="btn btn-primary">Update Note</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -95,11 +96,6 @@ require_once('db.php');
     </div>
   </nav>
   <?php
-
-  if ($insert) {
-    echo '
-    <div class="alert alert-success " role="alert"><strong>Success!</strong> Notes has been inserted successfully! </div>';
-  }
   ?>
 
 
@@ -171,7 +167,9 @@ require_once('db.php');
         console.log(title, description);
         titleEdit.value = title;
         descriptionEdit.value = description;
-        $('#editModal').modal('toggle')
+        snoEdit.value = e.target.id;
+        console.log(e.target.id);
+        $('#editModal').modal('toggle');
       })
     })
   </script>
