@@ -1,9 +1,9 @@
-<!-- Bismillahir Rahmanir Rahim 
-
-//Record insert the following one and start from 42 minutes 
--->
+<!-- Bismillahir Rahmanir Rahim -->
 <?php
 require_once('db.php');
+//require_once("update.php");
+require_once("create.php");
+require_once("delete.php");
 ?>
 
 <!doctype html>
@@ -23,10 +23,6 @@ require_once('db.php');
 </head>
 
 <body>
-  <!-- Edit modal -->
-  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
-    Edit Modal
-  </button> -->
 
   <!-- Edit modal -->
   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
@@ -50,12 +46,11 @@ require_once('db.php');
               <textarea class="form-control" id="descriptionEdit" rows="3" name="descriptionEdit"></textarea>
             </div>
             <small id="title" class="form-text text-muted">We'll never share your records with anyone else.</small>
-            <button type="submit" class="btn btn-primary">Update Note</button>
+
+            <button type="submit" class="btn btn-primary">Update changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -96,11 +91,16 @@ require_once('db.php');
     </div>
   </nav>
   <?php
-  ?>
+  if ($update) {
+    echo '<div class="alert alert-success " role="alert"><strong>Success!</strong> Notes has been updated successfully! </div>';
+  }
+  if ($delete) {
+    echo '<div class="alert alert-success " role="alert"><strong>Success!</strong> Notes has been deleted successfully! </div>';
+  }
+  if ($insert) {
+    echo '<div class="alert alert-success " role="alert"><strong>Success!</strong> Notes has been inserted successfully! </div>';
+  }
 
-
-  <?php
-  require_once("create.php");
   ?>
 
   <div class="container my-5">
@@ -170,6 +170,19 @@ require_once('db.php');
         snoEdit.value = e.target.id;
         console.log(e.target.id);
         $('#editModal').modal('toggle');
+      })
+    })
+    deletes = document.getElementsByClassName('delete');
+    Array.from(deletes).forEach((element) => {
+      element.addEventListener("click", (e) => {
+        sno = e.target.id.substr(1, );
+        if (confirm("Press OK button!")) {
+          console.log("yes");
+          window.location = `/crud_app/index.php?delete=${sno}`;
+        } else {
+          console.log("No")
+        }
+
       })
     })
   </script>

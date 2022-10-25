@@ -1,5 +1,7 @@
 <?php
 $insert = false;
+$update = false;
+$delete = false;
 mysqli_report(MYSQLI_REPORT_OFF);
 $server = "localhost";
 $username = "root";

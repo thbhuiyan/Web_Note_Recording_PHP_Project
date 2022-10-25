@@ -1,8 +1,6 @@
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['snoEdit'])) {
-
         //update the record
         $sno = $_POST["snoEdit"];
         $title = $_POST["titleEdit"];
@@ -11,14 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $result = mysqli_query($con, $sql);
         if ($result) {
             $update = true;
-        }
-    } else {
-        $title = $_POST["title"];
-        $description = $_POST["description"];
-        $sql = "INSERT INTO `tnotes` ( `title`, `description`) VALUES ('$title', '$description')";
-        $result = mysqli_query($con, $sql);
-        if ($result) {
-            $insert = true;
         }
     }
 }
